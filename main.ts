@@ -28,6 +28,10 @@ namespace microbitAPP {
             } else if (rx2 == "U") {
                 stateButtonDown = 0;
             }
+
+            // Write values to the serial monitor
+            serial.writeLine(rx1);
+            serial.writeLine(rx2);
         }
     });
 
