@@ -23,25 +23,25 @@ enum ToggleOption {
 
 
 
-let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
 
-let stateToggleOne = 0;
-let stateToggleTwo = 0;
-let stateToggleThree = 0;
-let stateLightOne = 0;
-let stateLightTwo = 0;
-let stateLightThree = 0;
-let stateButtonDown = 0;
-let sliderValX = 0;
-let sliderValY = 0;
-let sliderValZ = 0;
-let rx1 = "";
-let rx2 = "";
 
 //% weight=40 color=#226025 icon="\uf110" block="microbitAPP"
 namespace microbitAPP {
 
+    let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
 
+    let stateToggleOne = 0;
+    let stateToggleTwo = 0;
+    let stateToggleThree = 0;
+    let stateLightOne = 0;
+    let stateLightTwo = 0;
+    let stateLightThree = 0;
+    let stateButtonDown = 0;
+    let sliderValX = 0;
+    let sliderValY = 0;
+    let sliderValZ = 0;
+    let rx1 = "";
+    let rx2 = "";
     bluetooth.startUartService();
  
 
@@ -200,18 +200,21 @@ namespace microbitAPP {
      */
     //% block="Get state of $toggle"
     export function getToggleState(toggle: ToggleOption): number {
-        
+        let state = 0;
+
         switch (toggle) {
             case ToggleOption.Toggle1:
-                return stateToggleOne;
+                state = stateToggleOne;
                 break;
             case ToggleOption.Toggle2:
-                return stateToggleTwo;
+                state = stateToggleTwo;
                 break;
             case ToggleOption.Toggle3:
-                return stateToggleThree;
+                state = stateToggleThree;
                 break;
         }
+
+        return state;
     }
 
 }
