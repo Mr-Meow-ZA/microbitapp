@@ -115,12 +115,16 @@ namespace microbitAPP {
         });
     }
 
+    //% block="Do when rx1 is $rxOne and rx2 is $rxTwo"
+    export function onCustomRx1Rx2(rxOne:string, rxTwo:string, handler:() => void): void {
+        basic.forever(function() {
+            if (rx1 == rxOne && rx2 == rxTwo){
+                handler();
+            }
+        });
 
 
-
-
-
-
+    }
 
 
 }
