@@ -4,6 +4,16 @@ enum ButtonOption {
     Down,
     Left
 }
+enum LightOption {
+    Light1,
+    Light2,
+    Light3
+}
+
+enum LightState {
+    On,
+    Off
+}
 let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
 
 //% weight=40 color=#226025 icon="\uf110" block="microbitAPP"
@@ -84,15 +94,14 @@ namespace microbitAPP {
         return sliderValZ;
     }
 
-    /**
-     * Send a custom value to the app once.
-     * @param value - The value to send.
-     */
-    //% block="send number %value to App"
+    //% block="Display number %value to App"
     export function sendValueOnceToApp(value: number): void {
         bluetooth.uartWriteString("V1#" + convertToText(value));
     }
-
+    //% block="Display string $value on App"
+    export function sendStringToApp(value: string): void {
+        bluetooth.uartWriteString("V1#" + value);
+    }
 
     /**
      * Custom block to handle different button options based on rx1 values.
@@ -109,7 +118,6 @@ namespace microbitAPP {
             }
         });
     }
-
     //% block="When button %option is released"
     export function onButtonUpOption(option: ButtonOption, handler: () => void): void {
         basic.forever(function () {
@@ -130,13 +138,28 @@ namespace microbitAPP {
         });
     }
     /**
-     * Send a string to the app.
-     * @param message - The string to send.
+     * Send a string command to turn on or off the specified light.
+     * @param light - The light to control.
+     * @param state - The state of the light (On or Off).
      */
-    //% block="send string %message to App"
-    export function sendStringToApp(message: string): void {
-        bluetooth.uartWriteString(message);
-    }
+    //% block="Set $light $state"
+    export function setLightState(light: LightOption, state: LightState): void {
+        let command = "";
 
+        switch (light) {
+            case LightOption.Light1:
+                command = "L1";
+                break;
+            case LightOption.Light2:
+                command = "L2";
+                break;
+            case LightOption.Light3:
+                command = "L3";
+                break;
+        }
+
+        command += "#" + (state === LightState.On ? "1" : "0");
+        bluetooth.uartWriteString(command);
+    }
 
 }
