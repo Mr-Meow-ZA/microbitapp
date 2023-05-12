@@ -53,22 +53,6 @@ namespace microbitAPP {
     });
 
     /**
-     * Get the value of rx1 variable.
-     */
-    //% block="get rx1"
-    export function getRx1(): string {
-        return rx1;
-    }
-
-    /**
-     * Get the value of rx2 variable.
-     */
-    //% block="get rx2"
-    export function getRx2(): string {
-        return rx2;
-    }
-
-    /**
      * Get the state of the button.
      */
     //% block="button is pressed"
@@ -77,36 +61,36 @@ namespace microbitAPP {
     }
 
     /**
-     * Set the state of the button.
-     * @param state - The state of the button (pressed: true, released: false).
+     * Get the value of rx1 and rx2 variable.
      */
-    //% block="set button state to $state"
-    export function setButtonState(state: boolean): void {
-        stateButtonDown = state ? 1 : 0;
+    //% block="get rx1"
+    export function getRx1(): string {
+        return rx1;
     }
-
-    /**
-     * Get the X-axis value of the slider.
-     */
+    //% block="get rx2"
+    export function getRx2(): string {
+        return rx2;
+    }
     //% block="slider X value"
     export function getSliderX(): number {
         return sliderValX;
     }
-
-    /**
-     * Get the Y-axis value of the slider.
-     */
     //% block="slider Y value"
     export function getSliderY(): number {
         return sliderValY;
     }
-
-    /**
-     * Get the Z-axis value of the slider.
-     */
     //% block="slider Z value"
     export function getSliderZ(): number {
         return sliderValZ;
+    }
+
+    /**
+     * Send a custom value to the app once.
+     * @param value - The value to send.
+     */
+    //% block="send value %value once to App"
+    export function sendValueOnceToApp(value: number): void {
+        bluetooth.uartWriteString("V1#" + convertToText(value));
     }
 
 
@@ -131,8 +115,14 @@ namespace microbitAPP {
                 handler();
             }
         });
-
-
+    }
+    /**
+     * Send a string to the app.
+     * @param message - The string to send.
+     */
+    //% block="send string %message to App"
+    export function sendStringToApp(message: string): void {
+        bluetooth.uartWriteString(message);
     }
 
 
