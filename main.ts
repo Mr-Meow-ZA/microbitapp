@@ -14,22 +14,33 @@ enum LightState {
     On,
     Off
 }
+
+enum ToggleOption {
+    Toggle1,
+    Toggle2,
+    Toggle3
+}
+
+
+
 let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
+
+let stateToggleOne = 0;
+let stateToggleTwo = 0;
+let stateToggleThree = 0;
+let stateLightOne = 0;
+let stateLightTwo = 0;
+let stateLightThree = 0;
+let stateButtonDown = 0;
+let sliderValX = 0;
+let sliderValY = 0;
+let sliderValZ = 0;
+let rx1 = "";
+let rx2 = "";
 
 //% weight=40 color=#226025 icon="\uf110" block="microbitAPP"
 namespace microbitAPP {
-    let stateToggleOne = 0;
-    let stateToggleTwo = 0;
-    let stateToggleThree = 0;
-    let stateLightOne = 0;
-    let stateLightTwo = 0;
-    let stateLightThree = 0;
-    let stateButtonDown = 0;
-    let sliderValX = 0;
-    let sliderValY = 0;
-    let sliderValZ = 0;
-    let rx1 = "";
-    let rx2 = "";
+
 
     bluetooth.startUartService();
  
@@ -54,6 +65,12 @@ namespace microbitAPP {
                 sliderValY = parseInt(rx2);
             } else if (rx1 == "SZ") {
                 sliderValZ = parseInt(rx2);
+            } else if (rx1 === "T1") {
+                stateToggleOne = parseInt(rx2);
+            } else if (rx1 === "T2") {
+                stateToggleTwo = parseInt(rx2);
+            } else if (rx1 === "T3") {
+                stateToggleThree = parseInt(rx2);
             }
 
             // Write values to the serial monitor
@@ -138,28 +155,63 @@ namespace microbitAPP {
         });
     }
     /**
-     * Send a string command to turn on or off the specified light.
-     * @param light - The light to control.
-     * @param state - The state of the light (On or Off).
-     */
+    * Send a string command to turn on or off the specified light.
+    * Update the state variable accordingly.
+    * @param light - The light to control.
+    * @param state - The state of the light (On or Off).
+    */
     //% block="Set $light $state"
     export function setLightState(light: LightOption, state: LightState): void {
         let command = "";
+        let stateVariable = 0;
 
         switch (light) {
             case LightOption.Light1:
                 command = "L1";
+                stateVariable = stateLightOne;
                 break;
             case LightOption.Light2:
                 command = "L2";
+                stateVariable = stateLightTwo;
                 break;
             case LightOption.Light3:
                 command = "L3";
+                stateVariable = stateLightThree;
                 break;
         }
 
-        command += "#" + (state === LightState.On ? "1" : "0");
+        if (state === LightState.On) {
+            command += "#1";
+            stateVariable = 1;
+        } else {
+            command += "#0";
+            stateVariable = 0;
+        }
+
         bluetooth.uartWriteString(command);
+    }
+
+
+    /**
+     * Get the state of the specified toggle.
+     * Returns the value of the toggle (0 for off, 1 for on).
+     * @param toggle - The toggle to check.
+     * @returns The current state of the toggle (0 for off, 1 for on).
+     */
+    //% block="Get state of $toggle"
+    export function getToggleState(toggle: ToggleOption): number {
+        
+        switch (toggle) {
+            case ToggleOption.Toggle1:
+                return stateToggleOne;
+                break;
+            case ToggleOption.Toggle2:
+                return stateToggleTwo;
+                break;
+            case ToggleOption.Toggle3:
+                return stateToggleThree;
+                break;
+        }
     }
 
 }
