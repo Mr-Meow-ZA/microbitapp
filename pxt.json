@@ -1,6 +1,6 @@
 {
     "name": "microbitApp",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Extension for using the microbit control APP",
     "license": "MIT",
     "dependencies": {
