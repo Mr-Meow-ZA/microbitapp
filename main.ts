@@ -4,6 +4,9 @@ enum ButtonOption {
     Down,
     Left
 }
+enum CompassButtonOption {
+    N,NE,E,SE,S,SW,W,NW
+}
 enum LightOption {
     Light1,
     Light2,
@@ -29,6 +32,7 @@ enum ToggleOption {
 namespace microbitAPP {
 
     let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
+    let compassOptionStrings: string[] = ["BF", "BFR", "BR", "BBR", "BB", "BBL", "BL", "BFL"]
 
     let stateToggleOne = 0;
     let stateToggleTwo = 0;
@@ -42,6 +46,7 @@ namespace microbitAPP {
     let sliderValZ = 0;
     let rx1 = "";
     let rx2 = "";
+
     bluetooth.startUartService();
  
 
@@ -80,14 +85,6 @@ namespace microbitAPP {
     });
 
     /**
-     * Get the state of the button.
-     */
-    //% block="button is pressed"
-    export function isButtonPressed(): boolean {
-        return stateButtonDown === 1;
-    }
-
-    /**
      * Get the value of rx1 and rx2 variable.
      */
     //% block="get rx1"
@@ -111,7 +108,7 @@ namespace microbitAPP {
         return sliderValZ;
     }
 
-    //% block="Display number %value to App"
+    //% block="Display number %value on App"
     export function sendValueOnceToApp(value: number): void {
         bluetooth.uartWriteString("V1#" + convertToText(value));
     }
@@ -145,6 +142,28 @@ namespace microbitAPP {
             }
         });
     }
+
+    //% block="When compass button %option is pressed down"
+    export function compassButtonDown(option: CompassButtonOption, handler: () => void): void {
+        basic.forever(function () {
+            if (rx2 == "D") {
+                if (rx1 == compassOptionStrings[option]) {
+                    handler();
+                }
+            }
+        });
+    }
+    //% block="When compass button %option is released"
+    export function compassButtonUp(option: CompassButtonOption, handler: () => void): void {
+        basic.forever(function () {
+            if (rx2 == "U") {
+                if (rx1 == compassOptionStrings[option]) {
+                    handler();
+                }
+            }
+        });
+    }
+
 
     //% block="Do when rx1 is $rxOne and rx2 is $rxTwo"
     export function onCustomRx1Rx2(rxOne:string, rxTwo:string, handler:() => void): void {
