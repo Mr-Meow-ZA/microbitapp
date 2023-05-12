@@ -14,7 +14,7 @@ namespace microbitAPP {
     let rx2 = "";
 
     bluetooth.startUartService();
-    basic.showIcon(IconNames.House);
+ 
 
     bluetooth.onUartDataReceived(serial.delimiters(Delimiters.Comma), function () {
         let data = bluetooth.uartReadUntil(serial.delimiters(Delimiters.Comma));
@@ -30,8 +30,8 @@ namespace microbitAPP {
             }
 
             // Write values to the serial monitor
-            serial.writeLine(rx1);
-            serial.writeLine(rx2);
+            serial.writeLine("rx1: " + rx1);
+            serial.writeLine("rx2: " + rx2);
         }
     });
 
@@ -91,4 +91,18 @@ namespace microbitAPP {
     export function getSliderZ(): number {
         return sliderValZ;
     }
+
+    /**
+     * Custom block to handle different button options based on rx1 values.
+     */
+    //% block="on button option $option"
+    export function onButtonOption(option: string, handler: () => void): void {
+        basic.forever(function () {
+            if (rx1 == option) {
+                handler();
+            }
+        });
+    }
+
+
 }
