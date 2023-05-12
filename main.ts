@@ -1,3 +1,11 @@
+enum ButtonOption {
+    Up,
+    Right,
+    Down,
+    Left
+}
+let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
+
 //% weight=40 color=#226025 icon="\uf110" block="microbitAPP"
 namespace microbitAPP {
     let stateToggleOne = 0;
@@ -92,17 +100,27 @@ namespace microbitAPP {
         return sliderValZ;
     }
 
+
     /**
      * Custom block to handle different button options based on rx1 values.
+     * @param option - The button option to match.
+     * @param handler - The code to run when the option is matched.
      */
-    //% block="on button option $option"
-    export function onButtonOption(option: string, handler: () => void): void {
+    //% block="on button option %option"
+    export function onButtonOption(option: ButtonOption, handler: () => void): void {
         basic.forever(function () {
-            if (rx1 == option) {
+            if (rx1 == optionStrings[option]) {
                 handler();
             }
         });
     }
+
+
+
+
+
+
+
 
 
 }
