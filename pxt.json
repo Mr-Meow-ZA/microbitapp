@@ -1,14 +1,16 @@
 {
     "name": "microbitApp",
-    "description": "",
+    "version": "0.1.0",
+    "description": "Extension for using the microbit control APP",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "bluetooth": "*"
     },
     "files": [
         "main.ts",
-        "README.md"
+        "README.md",
+        "extension.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -20,5 +22,16 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "tsprj",
+    "yotta": {
+        "config": {
+            "microbit-dal": {
+                "bluetooth": {
+                    "open": 1,
+                    "whitelist": 0,
+                    "security_level": null
+                }
+            }
+        }
+    }
 }
