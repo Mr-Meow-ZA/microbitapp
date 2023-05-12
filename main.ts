@@ -25,7 +25,7 @@ enum ToggleOption {
 
 
 
-//% weight=40 color=#226025 icon="\uf110" block="microbitAPP"
+//% weight=40 color=#226025 icon="\uf10b" block="microbitAPP"
 namespace microbitAPP {
 
     let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
