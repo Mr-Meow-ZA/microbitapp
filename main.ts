@@ -88,7 +88,7 @@ namespace microbitAPP {
      * Send a custom value to the app once.
      * @param value - The value to send.
      */
-    //% block="send value %value once to App"
+    //% block="send number %value to App"
     export function sendValueOnceToApp(value: number): void {
         bluetooth.uartWriteString("V1#" + convertToText(value));
     }
@@ -99,11 +99,24 @@ namespace microbitAPP {
      * @param option - The button option to match.
      * @param handler - The code to run when the option is matched.
      */
-    //% block="on button option %option"
+    //% block="When button %option is pressed down"
     export function onButtonOption(option: ButtonOption, handler: () => void): void {
         basic.forever(function () {
+            if (rx2 == "D"){
             if (rx1 == optionStrings[option]) {
                 handler();
+            }
+            }
+        });
+    }
+
+    //% block="When button %option is released"
+    export function onButtonUpOption(option: ButtonOption, handler: () => void): void {
+        basic.forever(function () {
+            if (rx2 == "U") {
+                if (rx1 == optionStrings[option]) {
+                    handler();
+                }
             }
         });
     }
