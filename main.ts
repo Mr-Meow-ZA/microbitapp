@@ -37,6 +37,15 @@ namespace microbitAPP {
                 stateButtonDown = 0;
             }
 
+            // Check if rx1 is "SX", "SY", or "SZ" and store rx2 value accordingly
+            if (rx1 == "SX") {
+                sliderValX = parseInt(rx2);
+            } else if (rx1 == "SY") {
+                sliderValY = parseInt(rx2);
+            } else if (rx1 == "SZ") {
+                sliderValZ = parseInt(rx2);
+            }
+
             // Write values to the serial monitor
             serial.writeLine("rx1: " + rx1);
             serial.writeLine("rx2: " + rx2);
