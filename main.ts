@@ -79,6 +79,32 @@ namespace microbitApp {
         }
     });
     
+
+    /**
+     * Custom block to handle different button options based on rx1 values.
+     * @param option - The button option to match.
+     * @param handler - The code to run when the option is matched.
+     */
+    //% group="4 Button Navigation"
+    //% block="When button %option is pressed down"
+    export function onButtonOption(option: ButtonOption, handler: () => void): void {
+        basic.forever(function () {
+            if (rx1 == optionStrings[option] && rx2 == "D") {
+                handler();
+            }
+        });
+    }
+    //% group="4 Button Navigation"
+    //% block="When button %option is released"
+    export function onButtonUpOption(option: ButtonOption, handler: () => void): void {
+        basic.forever(function () {
+            if (rx1 == optionStrings[option] && rx2 == "U") {
+                handler();
+            }
+        });
+    }
+
+
     /**
      * Get the value of rx1 and rx2 variable.
      */
@@ -120,30 +146,6 @@ namespace microbitApp {
     }
 
     
-    /**
-     * Custom block to handle different button options based on rx1 values.
-     * @param option - The button option to match.
-     * @param handler - The code to run when the option is matched.
-     */
-    //% group="4 Button Navigation"
-    //% block="When button %option is pressed down"
-    export function onButtonOption(option: ButtonOption, handler: () => void): void {
-        basic.forever(function () {
-            if (rx1 == optionStrings[option] && rx2 == "D") {
-                handler();
-            }
-        });
-    }
-    //% group="4 Button Navigation"
-    //% block="When button %option is released"
-    export function onButtonUpOption(option: ButtonOption, handler: () => void): void {
-        basic.forever(function () {
-            if (rx1 == optionStrings[option] && rx2 == "U") {
-                handler();
-            }
-        });
-    }
-
     //% group="Compass Navigation"
     //% block="When compass button %option is pressed down"
     export function compassButtonDown(option: CompassButtonOption, handler: () => void): void {
