@@ -103,6 +103,15 @@ namespace microbitApp {
             }
         });
     }
+    //% group="4 Button Navigation"
+    //% block="When any Nav button is released"
+    export function onButtonReleased(handler: () => void): void {
+        basic.forever(function () {
+            if (rx2 == "U") {
+                handler();
+            }
+        });
+    }
 
 
     /**
