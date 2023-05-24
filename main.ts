@@ -143,6 +143,16 @@ namespace microbitApp {
         return sliderValZ;
     }
 
+    //% group="Slider and Rx Values"
+    //% block="When Slider on App changed"
+    export function onSliderUpdated(handler: () => void): void {
+        basic.forever(function () {
+            if (rx1 == "SX" || rx1 == "SY" || rx1 == "SZ") {
+                handler();
+            }
+        });
+    }
+
     //% group="Send and Display on App"
     //% block="Display number %value on App"
     export function sendValueOnceToApp(value: number): void {
