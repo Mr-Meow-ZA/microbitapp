@@ -1,25 +1,28 @@
 /******************************************************************
- * Extension for Chop Chop microbit App. 
+ * Extension for Chop Chop microbit App.
  * App by Nick Bradley and Extension by Rapha Pretorius
  * Author: Rapha Pretorius
  * Email: raphapretorius@gmail.com
 ******************************************************************/
 
 enum ButtonOption {
-    Up,Right,Down,Left
+    Up, Right, Down, Left
 }
+
 enum CompassButtonOption {
-    N,NE,E,SE,S,SW,W,NW
+    N, NE, E, SE, S, SW, W, NW
 }
+
 enum LightOption {
-    Light1,Light2,Light3
+    Light1, Light2, Light3
 }
 
 enum LightState {
-    On,Off
+    On, Off
 }
+
 enum ToggleOption {
-    Toggle1,Toggle2,Toggle3
+    Toggle1, Toggle2, Toggle3
 }
 
 enum SliderValue {
@@ -32,9 +35,9 @@ enum SliderValue {
 //% groups=['4 Button Navigation', 'Compass Navigation', 'Slider and Rx Values', 'Send and Display on App', 'Set Light Icon', 'Toggle State', 'Custom Receive then Do block']
 namespace microbitApp {
 
-    // define global variables
+    // Define global variables
     let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
-    let compassOptionStrings: string[] = ["BF", "BFR", "BR", "BBR", "BB", "BBL", "BL", "BFL"]
+    let compassOptionStrings: string[] = ["BF", "BFR", "BR", "BBR", "BB", "BBL", "BL", "BFL"];
     let stateToggleOne = 0;
     let stateToggleTwo = 0;
     let stateToggleThree = 0;
@@ -83,7 +86,6 @@ namespace microbitApp {
             serial.writeLine("rx2: " + rx2);
         }
     });
-    
 
     /**
      * Custom block to handle different button options based on rx1 values.
@@ -99,6 +101,7 @@ namespace microbitApp {
             }
         });
     }
+
     //% group="4 Button Navigation"
     //% block="When button %option is released"
     export function onButtonUpOption(option: ButtonOption, handler: () => void): void {
@@ -108,6 +111,7 @@ namespace microbitApp {
             }
         });
     }
+
     //% group="4 Button Navigation"
     //% block="When any Nav button is released"
     export function onButtonReleased(handler: () => void): void {
@@ -118,7 +122,6 @@ namespace microbitApp {
         });
     }
 
-
     /**
      * Get the value of rx1 and rx2 variable.
      */
@@ -127,13 +130,12 @@ namespace microbitApp {
     export function getRx1(): string {
         return rx1;
     }
+
     //% group="Slider and Rx Values"
     //% block="get rx2"
     export function getRx2(): string {
         return rx2;
     }
-
-
 
     //% group="Slider and Rx Values"
     //% block="get slider value %value"
@@ -147,7 +149,6 @@ namespace microbitApp {
         }
         return 0; // Default value if an invalid option is selected
     }
-
 
     //% group="Slider and Rx Values"
     //% block="When Slider on App changed"
@@ -164,13 +165,13 @@ namespace microbitApp {
     export function sendValueOnceToApp(value: number): void {
         bluetooth.uartWriteString("V1#" + convertToText(value));
     }
+
     //% group="Send and Display on App"
     //% block="Display string $value on App"
     export function sendStringToApp(value: string): void {
         bluetooth.uartWriteString("V1#" + value);
     }
 
-    
     //% group="Compass Navigation"
     //% block="When compass button %option is pressed down"
     export function compassButtonDown(option: CompassButtonOption, handler: () => void): void {
@@ -180,6 +181,7 @@ namespace microbitApp {
             }
         });
     }
+
     //% group="Compass Navigation"
     //% block="When compass button %option is released"
     export function compassButtonUp(option: CompassButtonOption, handler: () => void): void {
@@ -192,18 +194,18 @@ namespace microbitApp {
 
     //% group="Custom Receive then Do block"
     //% block="Do when rx1 is $rxOne and rx2 is $rxTwo"
-    export function onCustomRx1Rx2(rxOne:string, rxTwo:string, handler:() => void): void {
-        basic.forever(function() {
-            if (rx1 == rxOne && rx2 == rxTwo){
+    export function onCustomRx1Rx2(rxOne: string, rxTwo: string, handler: () => void): void {
+        basic.forever(function () {
+            if (rx1 == rxOne && rx2 == rxTwo) {
                 handler();
             }
         });
     }
 
     /*
-    * @param light - The light to control.
-    * @param state - The state of the light (On or Off).
-    */
+     * @param light - The light to control.
+     * @param state - The state of the light (On or Off).
+     */
     //% group="Set Light Icon"
     //% block="Set $light $state"
     export function setLightState(light: LightOption, state: LightState): void {
@@ -258,5 +260,4 @@ namespace microbitApp {
         }
         return state;
     }
-
 }
