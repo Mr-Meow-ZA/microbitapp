@@ -22,6 +22,11 @@ enum ToggleOption {
     Toggle1,Toggle2,Toggle3
 }
 
+enum SliderValue {
+    X,
+    Y,
+    Z
+}
 
 //% weight=40 color=#226025 icon="\uf10b" block="microbit App"
 //% groups=['4 Button Navigation', 'Compass Navigation', 'Slider and Rx Values', 'Send and Display on App', 'Set Light Icon', 'Toggle State', 'Custom Receive then Do block']
@@ -127,21 +132,22 @@ namespace microbitApp {
     export function getRx2(): string {
         return rx2;
     }
+
+
+
     //% group="Slider and Rx Values"
-    //% block="slider X value"
-    export function getSliderX(): number {
-        return sliderValX;
+    //% block="get slider value %value"
+    export function getSliderValue(value: SliderValue): number {
+        if (value === SliderValue.X) {
+            return sliderValX;
+        } else if (value === SliderValue.Y) {
+            return sliderValY;
+        } else if (value === SliderValue.Z) {
+            return sliderValZ;
+        }
+        return 0; // Default value if an invalid option is selected
     }
-    //% group="Slider and Rx Values"
-    //% block="slider Y value"
-    export function getSliderY(): number {
-        return sliderValY;
-    }
-    //% group="Slider and Rx Values"
-    //% block="slider Z value"
-    export function getSliderZ(): number {
-        return sliderValZ;
-    }
+
 
     //% group="Slider and Rx Values"
     //% block="When Slider on App changed"
