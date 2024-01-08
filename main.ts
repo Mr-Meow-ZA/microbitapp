@@ -27,9 +27,7 @@ enum ToggleOption {
 //% weight=40 color=#226025 icon="\uf10b" block="Microbit App"
 //% groups=['Buttons', 'Toggles', 'Sliders', 'Lights']
 namespace microbitApp {
-
     // define global variables
-    // let optionStrings: string[] = ["BF", "BR", "BB", "BL"];
     let optionStrings: string[] = ["BF", "BFR", "BR", "BBR", "BB", "BBL", "BL", "BFL"]
     let optionToggleStrings: string[] = ["T1", "T2", "T3",]
     let optionSliderStrings: string[] = ["SX", "SY", "SZ",]
