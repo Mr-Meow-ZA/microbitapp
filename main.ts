@@ -220,7 +220,7 @@ namespace microbitApp {
      * @param toggle - The toggle to check.
      * @returns The current state of the toggle (0 for off, 1 for on).
      */
-    //% group="Toggle"
+    //% group="Toggles"
     //% block="Get state of $toggle"
     export function getToggleState(toggle: ToggleOption): number {
         let state = 0;
