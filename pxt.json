@@ -1,6 +1,6 @@
 {
     "name": "pxt-microbitApp",
-    "version": "1.1.0",
+    "version": "1.1.2",
     "description": "Extension for using the microbit control APP",
     "license": "MIT",
     "dependencies": {
