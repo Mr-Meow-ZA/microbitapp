@@ -1,6 +1,6 @@
 /******************************************************************
- * Extension for Chop Chop microbit App. 
- * App by Nick Bradley and Extension by Rapha Pretorius
+ * Extension for Chopchop Micro:bit Controller Mobile App. 
+ * App by Nic Bradley and Extension by Rapha Pretorius
  * Author: Rapha Pretorius
  * Email: raphapretorius@gmail.com
 ******************************************************************/
@@ -13,14 +13,6 @@ enum SliderOption {
     SliderX, SliderY, SliderZ, 
  }
 
-// enum ButtonOption {
-//     Up,Right,Down,Left, 
-// }
-// enum CompassButtonOption {
-//     N,NE,E,SE,S,SW,W,NW
-// }
-
-
 enum LightOption {
     Light1,Light2,Light3
 }
@@ -31,7 +23,6 @@ enum LightState {
 enum ToggleOption {
     Toggle1,Toggle2,Toggle3
 }
-
 
 //% weight=40 color=#226025 icon="\uf10b" block="Microbit App"
 //% groups=['Buttons', 'Toggles', 'Sliders', 'Lights']
